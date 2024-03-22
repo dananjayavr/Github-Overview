@@ -21,6 +21,7 @@ jobs:
   secondjob:
     #runs-on: ubuntu-latest
     runs-on: Linux
+    needs: firstjob
     steps:
       - name: secondjob script
         shell: bash
@@ -40,6 +41,7 @@ jobs:
 
   thirdjob:
       runs-on: ubuntu-latest
+      needs: secondjob
       steps:
         - name: secondjob script
           shell: bash
