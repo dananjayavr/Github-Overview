@@ -36,7 +36,7 @@ jobs:
           who-to-greet: ${{ inputs.who-to-greet }}
       - name: time
         run: |
-          echo "The time ofthe greeting was at: ${{steps.greetings.outputs.time}}"
+          echo "The time of the greeting was at: ${{steps.print-to-log.outputs.time}}"
 
   thirdjob:
       runs-on: ubuntu-latest
