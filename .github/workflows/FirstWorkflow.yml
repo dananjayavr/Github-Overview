@@ -2,6 +2,12 @@ name: First Workflow
 
 on:
   workflow_dispatch:
+    inputs:
+      who-to-greet:
+        description: Who to greet in the log
+        required: true
+        default: 'Maya the Mackerel'
+        type: string
 
 jobs:
   firstjob:
@@ -21,6 +27,16 @@ jobs:
         run: |
           echo This is the second 
           echo and this is a multi-line script
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: greetings
+        id: print-to-log
+        uses: actions/hello-world-javascript-action@main
+        with:
+          who-to-greet: ${{ inputs.who-to-greet }}
+      - name: time
+        run: |
+          echo "The time ofthe greeting was at: ${{steps.greetings.outputs.time}}"
 
   thirdjob:
       runs-on: ubuntu-latest
