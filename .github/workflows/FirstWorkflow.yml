@@ -1,4 +1,6 @@
 name: First Workflow
+env:
+  WORKFLOW_VAR: "This variable is decclared at the workflow level"
 
 on:
   workflow_dispatch:
@@ -20,6 +22,8 @@ jobs:
         
   secondjob:
     #runs-on: ubuntu-latest
+    env:
+      JOB_VAR: "This is a job variable"
     runs-on: Linux
     needs: firstjob
     steps:
@@ -38,6 +42,9 @@ jobs:
       - name: time
         run: |
           echo "The time of the greeting was at: ${{steps.print-to-log.outputs.time}}"
+      - name: environment variables
+        env:
+          STEP_VAR: "This variable is declared at the step level"
 
   thirdjob:
       runs-on: ubuntu-latest
